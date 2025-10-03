@@ -42,12 +42,12 @@ export function useFileUpload({
         setUploadedFiles(prev => [...prev, result.attachment])
         onSuccess?.(result.attachment)
 
-        toast.success('Archivo subido correctamente')
+        if (toast) toast.success('Archivo subido correctamente')
         return result.attachment
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Error desconocido'
         onError?.(errorMessage)
-        toast.error(errorMessage)
+        if (toast) if (toast) toast.error(errorMessage)
         throw error
       } finally {
         setIsUploading(false)
@@ -78,12 +78,12 @@ export function useFileUpload({
         }
 
         setUploadedFiles(prev => prev.filter(file => file.id !== attachmentId))
-        toast.success('Archivo eliminado correctamente')
+        if (toast) toast.success('Archivo eliminado correctamente')
         return true
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Error desconocido'
         onError?.(errorMessage)
-        toast.error(errorMessage)
+        if (toast) if (toast) toast.error(errorMessage)
         return false
       }
     },
