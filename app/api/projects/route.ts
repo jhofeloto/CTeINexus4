@@ -17,15 +17,22 @@ const createProjectSchema = z.object({
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    let userId = null
 
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    if (process.env.NODE_ENV === 'development') {
+      // En desarrollo, usar usuario dummy para pruebas
+      userId = 'dev-user-id'
+    } else {
+      const session = await getServerSession(authOptions)
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+      }
+      userId = session.user.id
     }
 
     const projects = await prisma.project.findMany({
       where: {
-        userId: session.user.id,
+        userId: userId,
       },
       include: {
         products: {
@@ -53,10 +60,17 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    let userId = null
 
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    if (process.env.NODE_ENV === 'development') {
+      // En desarrollo, usar usuario dummy para pruebas
+      userId = 'dev-user-id'
+    } else {
+      const session = await getServerSession(authOptions)
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+      }
+      userId = session.user.id
     }
 
     const body = await request.json()
@@ -67,7 +81,7 @@ export async function POST(request: NextRequest) {
         ...validatedData,
         startDate: validatedData.startDate ? new Date(validatedData.startDate) : null,
         endDate: validatedData.endDate ? new Date(validatedData.endDate) : null,
-        userId: session.user.id,
+        userId: userId,
       },
       include: {
         products: {

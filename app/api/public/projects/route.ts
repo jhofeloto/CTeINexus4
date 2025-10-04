@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
+  console.log('GET /api/public/projects called')
   try {
     const { searchParams } = new URL(request.url)
     const limit = parseInt(searchParams.get('limit') || '10')
@@ -77,6 +78,7 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error fetching public projects:', error)
+    console.error('Error details:', JSON.stringify(error, null, 2))
     return NextResponse.json(
       { error: 'Error interno del servidor' },
       { status: 500 }

@@ -5,6 +5,21 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('🌱 Iniciando seed de la base de datos...')
 
+  // Crear usuario dummy para desarrollo
+  const dummyUser = await prisma.user.upsert({
+    where: { id: 'dev-user-id' },
+    update: {},
+    create: {
+      id: 'dev-user-id',
+      name: 'Usuario de Desarrollo',
+      email: 'dev@example.com',
+      role: 'RESEARCHER',
+    },
+  })
+
+  console.log('👤 Usuario dummy creado:', dummyUser.email)
+
+  // Crear tipos de producto CTeI
   // Crear tipos de producto CTeI
   const productTypes = [
     // Investigación y Desarrollo

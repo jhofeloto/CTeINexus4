@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
+  console.log('GET /api/product-types called')
   try {
     const productTypes = await prisma.productType.findMany({
       orderBy: {
@@ -12,6 +13,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(productTypes)
   } catch (error) {
     console.error('Error fetching product types:', error)
+    console.error('Error details:', JSON.stringify(error, null, 2))
     return NextResponse.json(
       { error: 'Error interno del servidor' },
       { status: 500 }
