@@ -1,6 +1,10 @@
 import { getProviders } from 'next-auth/react'
 import SignInButton from '@/components/auth/signin-button'
 
+// 👇 obliga a runtime dinámico (no SSG), desactiva caché
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function SignInPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
