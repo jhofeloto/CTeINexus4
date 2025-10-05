@@ -15,6 +15,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session, user }) {
+      console.log("Auth callback: session", { session, user });
       if (session.user) {
         // @ts-ignore: extendemos el tipo en next-auth.d.ts
         session.user.id = user.id;
@@ -22,6 +23,18 @@ export const authOptions: NextAuthOptions = {
         session.user.role = (user as any).role ?? "RESEARCHER";
       }
       return session;
+    },
+    async signIn({ user, account, profile }) {
+      console.log("Auth callback: signIn", { user, account, profile });
+      return true;
+    },
+    async jwt({ token, user, account }) {
+      console.log("Auth callback: jwt", { token, user, account });
+      if (user) {
+        token.id = user.id;
+        token.role = (user as any).role ?? "RESEARCHER";
+      }
+      return token;
     },
   },
   // pages: { signIn: "/auth/signin" }, // si usas una página custom
