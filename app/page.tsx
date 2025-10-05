@@ -1,6 +1,7 @@
 import { HeroSection } from '@/components/sections/hero-section'
 import { FeaturesSection } from '@/components/sections/features-section'
 import { ProjectsShowcase } from '@/components/sections/projects-showcase'
+import LoginButton from "@/components/auth/signin-button";
 
 export default function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default function HomePage() {
       <HeroSection />
       <FeaturesSection />
       <ProjectsShowcase />
+      <LoginButton />
     </main>
   )
 }

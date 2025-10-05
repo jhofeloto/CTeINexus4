@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "get_projects_should_return_user_projects",
+    "description": "Test the GET /api/projects endpoint to ensure it returns a list of projects belonging to the authenticated user with status 200. Verify that unauthorized access returns 401."
+  },
+  {
+    "id": "TC002",
+    "title": "post_projects_should_create_new_project",
+    "description": "Test the POST /api/projects endpoint to create a new project with valid data. Verify that the project is created successfully with status 201. Test invalid data returns 400 and unauthorized access returns 401."
+  },
+  {
+    "id": "TC003",
+    "title": "get_project_by_id_should_return_project_details",
+    "description": "Test the GET /api/projects/{id} endpoint to retrieve details of a specific project by ID. Verify that the project details are returned with status 200 and that a non-existent project ID returns 404."
+  },
+  {
+    "id": "TC004",
+    "title": "put_project_by_id_should_update_project",
+    "description": "Test the PUT /api/projects/{id} endpoint to update an existing project with valid data. Verify successful update returns status 200 and updating a non-existent project returns 404."
+  },
+  {
+    "id": "TC005",
+    "title": "get_products_should_return_user_products_with_optional_project_filter",
+    "description": "Test the GET /api/products endpoint to return products belonging to the authenticated user. Verify filtering by projectId query parameter works correctly. Unauthorized access should return 401."
+  },
+  {
+    "id": "TC006",
+    "title": "post_products_should_create_new_product",
+    "description": "Test the POST /api/products endpoint to create a new product with valid data including productTypeId and projectId. Verify successful creation returns 201. Test invalid data returns 400 and non-existent project or product type returns 404."
+  },
+  {
+    "id": "TC007",
+    "title": "get_product_by_id_should_return_product_details",
+    "description": "Test the GET /api/products/{id} endpoint to retrieve details of a specific product by ID. Verify successful retrieval returns 200 and non-existent product ID returns 404."
+  },
+  {
+    "id": "TC008",
+    "title": "put_product_by_id_should_update_product",
+    "description": "Test the PUT /api/products/{id} endpoint to update an existing product with valid data. Verify successful update returns 200 and updating a non-existent product returns 404."
+  },
+  {
+    "id": "TC009",
+    "title": "get_product_types_should_return_list_of_product_types",
+    "description": "Test the GET /api/product-types endpoint to retrieve the list of available product types. Verify the response returns status 200 and includes an array of product type objects."
+  },
+  {
+    "id": "TC010",
+    "title": "get_public_projects_should_return_filtered_paginated_projects",
+    "description": "Test the GET /api/public/projects endpoint to search and retrieve public projects with optional search, limit, and offset query parameters. Verify pagination works correctly and response includes projects and pagination metadata."
+  }
+]

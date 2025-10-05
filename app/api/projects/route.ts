@@ -19,8 +19,8 @@ export async function GET(request: NextRequest) {
   try {
     let userId = null
 
-    if (process.env.NODE_ENV === 'development') {
-      // En desarrollo, usar usuario dummy para pruebas
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+      // En desarrollo o test, usar usuario dummy para pruebas
       userId = 'dev-user-id'
     } else {
       const session = await getServerSession(authOptions)
@@ -62,8 +62,8 @@ export async function POST(request: NextRequest) {
   try {
     let userId = null
 
-    if (process.env.NODE_ENV === 'development') {
-      // En desarrollo, usar usuario dummy para pruebas
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+      // En desarrollo o test, usar usuario dummy para pruebas
       userId = 'dev-user-id'
     } else {
       const session = await getServerSession(authOptions)

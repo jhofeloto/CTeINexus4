@@ -1,0 +1,498 @@
+[
+  {
+    "id": "TC001",
+    "title": "User authentication with Google OAuth",
+    "description": "Verify that users can successfully authenticate using Google OAuth and receive appropriate roles assigned by the superadministrator.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the login page"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to sign in via Google OAuth using valid account credentials"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that the user is authenticated successfully and redirected to the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate that the user session contains the correct role assigned by the superadministrator"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "User authentication failure with invalid Google credentials",
+    "description": "Ensure that authentication fails when incorrect or revoked Google OAuth credentials are used.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the login page"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to sign in using invalid or revoked Google OAuth credentials"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that authentication is denied and the user is shown an appropriate error message"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Create a new project with valid data",
+    "description": "Test the creation of a new project with all required fields filled correctly.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the project creation form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in all mandatory fields: title, summary, keywords, proponentEntity, optional fields startDate, endDate, budget, isPublic"
+      },
+      {
+        "type": "action",
+        "description": "Submit the project creation form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the project is created with correct data and a 201 created response is returned"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that the project is accessible in the user's dashboard and in the database"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Create a project with missing mandatory fields",
+    "description": "Verify that the project creation fails with validation errors when mandatory fields are missing.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the project creation form"
+      },
+      {
+        "type": "action",
+        "description": "Leave mandatory fields such as title or summary empty"
+      },
+      {
+        "type": "action",
+        "description": "Submit the project creation form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the API returns a 400 Bad Request response with validation error details"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Update an existing project",
+    "description": "Verify that authenticated users can update project details correctly with valid changes and receive confirmation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher owning a project"
+      },
+      {
+        "type": "action",
+        "description": "Retrieve an existing project details"
+      },
+      {
+        "type": "action",
+        "description": "Modify project fields such as status, keywords, budget"
+      },
+      {
+        "type": "action",
+        "description": "Submit the update request via PUT to the project API"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a 200 OK response with updated project data"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that changes persist and are reflected in the database and UI"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Update non-existing project",
+    "description": "Verify that attempting to update a project that does not exist returns the appropriate error.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher"
+      },
+      {
+        "type": "action",
+        "description": "Send a PUT request to update a non-existent project ID"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that a 404 Not Found error is returned"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Create new product linked to existing project",
+    "description": "Test creating a product linked to an existing project with valid data including product type and optional file attachments.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher"
+      },
+      {
+        "type": "action",
+        "description": "Select an existing project to associate the product with"
+      },
+      {
+        "type": "action",
+        "description": "Fill product details including title, summary, productTypeId, projectId"
+      },
+      {
+        "type": "action",
+        "description": "Submit the product creation request"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the product creation with a 201 Created response and correct association to the project"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Create product with invalid product type or project",
+    "description": "Verify that product creation fails with errors if product type ID or project ID does not exist.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to create a product using invalid or non-existing productTypeId or projectId"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the API returns 404 Not Found errors for missing project or product type"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Update product details",
+    "description": "Ensure that product details can be updated successfully and changes are persisted.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as an authenticated researcher"
+      },
+      {
+        "type": "action",
+        "description": "Retrieve an existing product associated with the user's project"
+      },
+      {
+        "type": "action",
+        "description": "Modify product fields such as title, summary, productUrl, visibility"
+      },
+      {
+        "type": "action",
+        "description": "Submit the product update request via PUT"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the API returns 200 OK with updated product details"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Retrieve list of product types",
+    "description": "Verify that the API returns a list of 20 product types with id, name, description, and category.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Send a GET request to the product-types API endpoint"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the response is 200 OK with an array containing 20 product types with correct fields"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Public project exploration with search and pagination",
+    "description": "Test that unauthenticated users can query public projects using search terms with correct pagination controls.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Send unauthenticated GET requests to the public projects API with various search keywords, limits, and offsets"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the response status is 200 OK and contains matching projects only marked as public"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm pagination metadata correctly reflects total, limit, offset, and hasMore flag"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "File upload for project entity with valid permissions",
+    "description": "Verify that logged-in users can upload files securely to projects via Cloudinary integration and receive upload success response.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Authenticate as a user with permission to modify a project"
+      },
+      {
+        "type": "action",
+        "description": "Upload a valid file with correct entityType 'project' and valid entityId"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify response indicates success and returns attachment metadata including URL"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the file is stored and accessible with correct permissions"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "File upload rejected for invalid file or missing required parameters",
+    "description": "Ensure file upload endpoint rejects requests missing required fields or containing unsupported file formats.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Authenticate as a valid user"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to upload without file, missing entityType, or invalid entityId"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the API returns 400 Bad Request error"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Delete uploaded file with proper permissions",
+    "description": "Verify that users can delete uploaded files associated with projects or products if authorized.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Authenticate as a user authorized to manage the file's entity"
+      },
+      {
+        "type": "action",
+        "description": "Send a DELETE request with a valid file ID to the upload API"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm response indicates successful file deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the file is no longer accessible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Delete file fails without permission or invalid file ID",
+    "description": "Ensure file deletion fails and returns errors if user lacks permission or file ID does not exist.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Authenticate as a user without permission to delete the file"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to delete file using invalid or unauthorized file ID"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify receiving either 401 Unauthorized or 404 Not Found response"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "IA Evaluation engine provides scoring and recommendations",
+    "description": "Verify that submitting a project proposal for AI evaluation returns accurate scoring, recommendations, and suggestions displayed correctly to the user.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a researcher"
+      },
+      {
+        "type": "action",
+        "description": "Submit a project proposal for evaluation via the IA evaluation engine"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the response contains a numeric score, qualitative recommendations, and actionable suggestions"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm UI displays evaluation results properly"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Chatbot provides relevant responses on project formulation",
+    "description": "Test that the conversational assistant/chatbot returns accurate, helpful, and relevant answers regarding formulation and categorization of CTeI projects.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a researcher"
+      },
+      {
+        "type": "action",
+        "description": "Ask the chatbot various questions about project formulation and product types"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the chatbot replies with relevant and comprehensible responses"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Dashboard project listing with search and filtering",
+    "description": "Verify that the dashboard shows a correct list of authenticated user's projects and supports search, filter by status, and multiple collaborator associations.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as researcher with multiple projects and collaborators"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Perform searches using project titles and keywords"
+      },
+      {
+        "type": "action",
+        "description": "Filter projects by status (PROPOSED, IN_PROGRESS, etc.)"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the displayed results match search and filter criteria"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify projects correctly show associated collaborators"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Public portal access without authentication",
+    "description": "Ensure that unauthenticated users can access the public portal and explore public projects in read-only mode with functional filters and information.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Access the public portal website without authentication"
+      },
+      {
+        "type": "action",
+        "description": "Use filters and search to navigate public projects"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the projects shown are only those with isPublic flag set"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm read-only access to project details and associated products"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Responsive UI and accessibility compliance",
+    "description": "Verify that all user interface pages comply with responsive design and WCAG accessibility standards across desktop and tablet devices.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the main platform pages on desktop and tablet viewports"
+      },
+      {
+        "type": "action",
+        "description": "Test navigation and interaction elements for usability and keyboard accessibility"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm layout adjusts correctly and content is fully accessible according to WCAG"
+      }
+    ]
+  }
+]

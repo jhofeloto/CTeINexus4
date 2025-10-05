@@ -1,0 +1,17 @@
+{
+  "status": "init",
+  "type": "backend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "backendAuthType": "public",
+  "executionArgs": {
+    "projectName": "CTeINexus4",
+    "projectPath": "/Users/jhofeloto/Library/CloudStorage/GoogleDrive-jhofeloto@41gu5.com/Unidades compartidas/DEV/chocoInventa docs/Lab movil +Plataforma/Codigo fuente/CTeINexus4",
+    "testIds": [],
+    "additionalInstruction": "Ejecutar pruebas de TestSprite para CTeINexus4. Nota: La base de datos de Supabase parece estar pausada, por lo que esperamos errores 500 en endpoints que requieren base de datos. Enfocar las pruebas en validar la estructura de la aplicación, autenticación, y otros aspectos que no dependan de la base de datos. Documentar específicamente qué problemas son por base de datos vs otros problemas de configuración.",
+    "envs": {
+      "API_KEY": "sk-user-2OZ-I7WZAhSPLaZDQslkmd4Rb_-gFjw7okCY-NR8yfrZSy3fK_VUpETk5NjtVYd_KE2a0-WhaMVpACYHwY_Kotl5_TlW3tYH1hsMMitlZSq71cXVzDQTOzZgH9PXJHtNLdA"
+    }
+  },
+  "proxy": "http://bcc7038a-463b-48ba-b79f-cd865a55f80d:WGOJNVo0Z1li4PtmKSo7LECJuDFSiqC5@tun.testsprite.com:8080"
+}

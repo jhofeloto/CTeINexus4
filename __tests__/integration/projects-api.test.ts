@@ -3,7 +3,11 @@ import * as appHandler from '@/app/api/projects/route'
 
 // Mock Next.js
 jest.mock('next/server', () => ({
-  NextRequest: class NextRequest {},
+  NextRequest: jest.fn().mockImplementation(function(url) {
+    this.url = url;
+    this.nextUrl = { pathname: new URL(url).pathname };
+    this.headers = new Headers();
+  }),
   NextResponse: {
     json: jest.fn((data, options) => ({ data, options, json: true })),
   },
