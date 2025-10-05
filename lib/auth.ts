@@ -1,9 +1,7 @@
-import { NextAuthOptions } from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { prisma } from '@/lib/prisma'
-
-console.log('Auth options loaded with PrismaAdapter');
+import NextAuth, { type NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -11,57 +9,21 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      // opcional: authorization params extras (prompt, access_type, etc.)
+      // authorization: { params: { prompt: "consent", access_type: "offline", response_type: "code" } }
     }),
   ],
   callbacks: {
-    session: async ({ session, user }) => {
-      console.log('Session callback:', { session, user });
-      if (session?.user) {
-        session.user.id = user.id
+    async session({ session, user }) {
+      if (session.user) {
+        // @ts-ignore: extendemos el tipo en next-auth.d.ts
+        session.user.id = user.id;
+        // @ts-ignore
+        session.user.role = (user as any).role ?? "RESEARCHER";
       }
-      return session
-    },
-    jwt: async ({ user, token }) => {
-      console.log('JWT callback:', { user, token });
-      if (user) {
-        token.sub = user.id
-      }
-      return token
+      return session;
     },
   },
-  session: {
-    strategy: 'database',
-  },
-  pages: {
-    signIn: '/auth/signin',
-  },
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-    pkceCodeVerifier: {
-      name: "next-auth.pkce.code_verifier",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-    state: {
-      name: "next-auth.state",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-  },
+  // pages: { signIn: "/auth/signin" }, // si usas una página custom
+  // debug: process.env.NODE_ENV !== "production",
 };
