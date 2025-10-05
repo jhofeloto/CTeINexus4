@@ -1,5 +1,5 @@
 import { getProviders } from 'next-auth/react'
-import SignInButton from '@/components/auth/signin-button'
+import LoginButton from '@/components/auth/LoginButton'
 
 // 👇 obliga a runtime dinámico (no SSG), desactiva caché
 export const dynamic = 'force-dynamic';
@@ -18,7 +18,7 @@ export default async function SignInPage() {
           </p>
         </div>
         <div className="bg-white p-8 rounded-lg shadow-sm border">
-          <SignInButton />
+          <LoginButton />
         </div>
       </div>
     </div>
