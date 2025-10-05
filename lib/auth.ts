@@ -14,7 +14,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log('SignIn callback:', { user, account, profile, email });
+      return true;
+    },
     async session({ session, user }) {
+      console.log('Session callback:', { session, user });
       if (session.user) {
         // @ts-ignore: extendemos el tipo en next-auth.d.ts
         session.user.id = user.id;
