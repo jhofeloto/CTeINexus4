@@ -13,7 +13,7 @@ Plataforma integral para la gestión de proyectos de investigación científica 
 
 ### ✅ MVP Completado (Fase 1)
 - **Portal Público**: Landing page con explicación del sistema y buscador público
-- **Autenticación**: Login seguro con Google OAuth
+- **Autenticación**: Login seguro con Google OAuth (NextAuth + PrismaAdapter)
 - **Dashboard Privado**: Gestión completa de proyectos y productos CTeI
 - **Sistema de Archivos**: Subida de documentos con Cloudinary
 - **Base de Datos**: Schema completo con 20 tipos de productos CTeI
