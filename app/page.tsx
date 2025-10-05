@@ -1,15 +1,6 @@
-import { HeroSection } from '@/components/sections/hero-section'
-import { FeaturesSection } from '@/components/sections/features-section'
-import { ProjectsShowcase } from '@/components/sections/projects-showcase'
-import LoginButton from "@/components/auth/signin-button";
-
-export default function HomePage() {
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <HeroSection />
-      <FeaturesSection />
-      <ProjectsShowcase />
-      <LoginButton />
-    </main>
-  )
+export default function Page() {
+  return <main style={{padding:24}}>
+    <h1>✅ Producción lista</h1>
+    <p>Home desde <code>app/page.tsx</code></p>
+  </main>
 }

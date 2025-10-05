@@ -4,6 +4,11 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 
+// 👇 obliga a runtime dinámico (no SSG), desactiva caché
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 const createProjectSchema = z.object({
   title: z.string().min(1, 'El título es requerido'),
   summary: z.string().min(1, 'El resumen es requerido'),
