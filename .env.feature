@@ -1,0 +1,26 @@
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/ctein_nexus4_feature"
+
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-url-feature"
+SUPABASE_SERVICE_ROLE_KEY="your-supabase-service-role-key-feature"
+
+# NextAuth.js
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key-here"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME="your-cloudinary-cloud-name"
+CLOUDINARY_API_KEY="your-cloudinary-api-key"
+CLOUDINARY_API_SECRET="your-cloudinary-api-secret"
+
+# Dify.ai (para Fase 2)
+DIFY_API_KEY="your-dify-api-key"
+DIFY_API_URL="https://api.dify.ai/v1"
+
+# Application
+NODE_ENV="development"
