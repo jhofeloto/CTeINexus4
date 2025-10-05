@@ -14,10 +14,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: async ({ session, token }) => {
-      console.log('Session callback:', { session, token });
+    session: async ({ session, user }) => {
+      console.log('Session callback:', { session, user });
       if (session?.user) {
-        session.user.id = token.sub!
+        session.user.id = user.id
       }
       return session
     },
